@@ -1,4 +1,25 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
+import { RecadosService } from './recados.service';
+
+interface Pagination {
+  limit: number;
+  offset: number;
+}
+
+interface Recado {
+  recado: string;
+}
 
 // CRUD
 // Create -> POST -> criar um recado
@@ -12,35 +33,33 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post
 
 @Controller('recados')
 export class RecadosController {
-    @HttpCode(HttpStatus.OK)
-    @Get()
-    findAll(@Query() pagination: any) {
-        const {limit=10, offset=10} = pagination
-        console.log(pagination)
-        return `Retorna todos os recado. Limit=${limit}, Offset=${offset}`
-    }
+  constructor(private readonly recadosServices: RecadosService) {}
 
-    @Get(':id')
-    findOne(@Param('id') id: string) {
-        return `Essa rota retorna o recado ID ${id}`
-    }
+  @HttpCode(HttpStatus.OK)
+  @Get()
+  findAll(@Query() pagination: Pagination) {
+    /* const { limit = 10, offset = 10 } = pagination;
+    return `Retorna todos os recado. Limit=${limit}, Offset=${offset}`; */
+    return this.recadosServices.findAll();
+  }
 
-    @Post()
-    create(@Body() body: any) {
-        console.log(body);
-        return body
-    }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.recadosServices.findOne(id);
+  }
 
-    @Patch(':id')
-    update(@Param('id') id: string, @Body() body: any) {
-        return{
-            id,
-            ...body
-        }
-    }
+  @Post()
+  create(@Body() body: Recado) {
+    return this.recadosServices.create(body);
+  }
 
-    @Delete(':id')
-    remove(@Param('id') id: string) {
-        return `Essa rota remove o recado ID ${id}`
-    }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() body: Recado) {
+    return this.recadosServices.update(id, body);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.recadosServices.remove(id);
+  }
 }
