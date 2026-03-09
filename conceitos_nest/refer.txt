@@ -1,0 +1,14 @@
+Node 20
+npm run start:dev
+
+
+# Seção 4: Criando um CRUD para explorar as possibilidades do NestJS
+
+## 26. Usando HttpException e NotFoundException para exibir mensagens de erro HTTP
+nest g cl recados/dto/create-recado.dto --no-spec --flat
+
+## 28. Validando dados de entrada com useGlobalPipes, ValidationPipe e class-validator
+npm i class-validator@0.14 class-transformer
+
+## 29. Use PartialType de Mapped-Types para a validação de campos em UpdateRecadoDto
+npm i @nestjs/mapped-types

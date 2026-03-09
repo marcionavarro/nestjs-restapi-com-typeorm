@@ -3,8 +3,8 @@
 # Recados
 ### Lista todos os recados
 GET {{baseUrl}}/recados/
-?limit=100
-&offset=300
+?limit=10
+&offset=0
 
 ### Lista apenas um recado
 GET {{baseUrl}}/recados/2/
@@ -16,9 +16,7 @@ Content-Type: application/json
 {
     "text": "Novo recado",
     "de": "Joana",
-    "para": "João",
-    "lido": false,
-    "data": "2025-10-04T18:31:52.729Z"
+    "para": "João"
 }
 
 ### Atualiza um recado
@@ -27,10 +25,7 @@ Content-Type: application/json
 
 {
     "text": "Editando recando",
-    "de": "Joana",
-    "para": "João",
-    "lido": false,
-    "data": "2025-10-04T18:31:52.729Z"
+    "lido": true
 }
 
 ### Remove  um recado
