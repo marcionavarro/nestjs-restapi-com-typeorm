@@ -43,10 +43,11 @@ export class RecadosController {
 
   @HttpCode(HttpStatus.OK)
   @Get()
-  findAll(@Query() pagination: Pagination) {
+  async findAll(@Query() pagination: Pagination) {
     const { limit = 10, offset = 10 } = pagination;
     // return `Retorna todos os recado. Limit=${limit}, Offset=${offset}`;
-    return this.recadosServices.findAll();
+    const recados = await this.recadosServices.findAll();
+    return recados;
   }
 
   @Get(':id')

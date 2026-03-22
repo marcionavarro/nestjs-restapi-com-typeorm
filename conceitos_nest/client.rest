@@ -20,34 +20,14 @@ Content-Type: application/json
 }
 
 ### Atualiza um recado
-PATCH  {{baseUrl}}/recados/2/
+PATCH  {{baseUrl}}/recados/5/
 Content-Type: application/json
 
 {
     "text": "Editando recando",
-    "lido": true
+    "lido": false
 }
 
 ### Remove  um recado
-DELETE {{baseUrl}}/recados/2/
+DELETE {{baseUrl}}/recados/4/
 ### Cria um recado
-
-### AppControllerGetHello
-
-# @name AppControllerGetHello
-GET {{baseUrl}}/home/hello
-
-### ExemploDeRota
-
-# @name ExemploDeRota
-GET {{baseUrl}}/home/exemplo
-
-### ConceitosManualController Home
-
-# @name ConceitosManualControllerHome
-GET {{baseUrl}}/conceitos-manual
-
-### ConceitosManualController Home
-
-# @name ConceitosAutomaticoControllerHome
-GET {{baseUrl}}/conceitos-automatico
