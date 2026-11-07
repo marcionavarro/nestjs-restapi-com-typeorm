@@ -8,8 +8,8 @@ GET {{baseUrl}}/recados/
 
 ### Lista apenas um recado
 GET {{baseUrl}}/recados/2/
-### Cria um recado
 
+### Cria um recado
 POST {{baseUrl}}/recados
 Content-Type: application/json
 
@@ -30,4 +30,36 @@ Content-Type: application/json
 
 ### Remove  um recado
 DELETE {{baseUrl}}/recados/4/
-### Cria um recado
+
+################################################################
+
+# Pessoa
+### Lista todos as pessoas
+GET {{baseUrl}}/pessoas/
+?limit=10
+&offset=0
+
+### Lista apenas uma pessoa
+GET {{baseUrl}}/pessoas/10/
+
+### Cria uma pessoa
+POST {{baseUrl}}/pessoas
+Content-Type: application/json
+
+{
+    "nome": "Carlos",
+    "email": "carlos@example.com",
+    "password": "123456"
+}
+
+### Atualiza uma pessoa
+PATCH  {{baseUrl}}/pessoas/10/
+Content-Type: application/json
+
+{
+    "password": "654321",
+    "nome": "João"
+}
+
+### Remove uma pessoa
+DELETE {{baseUrl}}/pessoas/3/

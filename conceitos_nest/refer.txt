@@ -18,3 +18,11 @@ npm i @nestjs/mapped-types
 
 ## 33. Configurando o TypeOrmModule com PostgreSQL (módulo do TypeORM para NestJS)
 npm i @nestjs/typeorm typeorm pg
+nest g res pessoas
+ 
+
+
+ # Utils
+ nest --help
+ npm run format
+ npm run lint
