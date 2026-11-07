@@ -7,25 +7,25 @@ GET {{baseUrl}}/recados/
 &offset=0
 
 ### Lista apenas um recado
-GET {{baseUrl}}/recados/2/
+GET {{baseUrl}}/recados/12/
 
 ### Cria um recado
 POST {{baseUrl}}/recados
 Content-Type: application/json
 
 {
-    "text": "De Ricardo para Ana",
-    "deId": 13,
-    "paraId": 14
+    "text": "De Carlos para Joana",
+    "deId": 10,
+    "paraId": 11
 }
 
 ### Atualiza um recado
-PATCH  {{baseUrl}}/recados/5/
+PATCH  {{baseUrl}}/recados/13/
 Content-Type: application/json
 
 {
-    "text": "Editando recando",
-    "lido": false
+    "text": "De Carlos para Joana - atualizado",
+    "lido": true
 }
 
 ### Remove  um recado
@@ -62,4 +62,4 @@ Content-Type: application/json
 }
 
 ### Remove uma pessoa
-DELETE {{baseUrl}}/pessoas/3/
+DELETE {{baseUrl}}/pessoas/12/

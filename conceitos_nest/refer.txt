@@ -28,3 +28,9 @@ npm i @nestjs/typeorm typeorm pg
  nest --help
  npm run format
  npm run lint
+
+
+----------------------------------------------------------------------------------------------
+# Docs
+https://typeorm.io/
+https://docs.nestjs.com/techniques/database
