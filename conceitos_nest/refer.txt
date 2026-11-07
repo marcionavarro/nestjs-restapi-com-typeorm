@@ -13,14 +13,16 @@ npm i class-validator@0.14 class-transformer
 ## 29. Use PartialType de Mapped-Types para a validação de campos em UpdateRecadoDto
 npm i @nestjs/mapped-types
 
+----------------------------------------------------------------------------------------------
 
 # Seção 5: Banco de dados PostgreSQL com o TypeORM e TypeScript no NestJS
 
 ## 33. Configurando o TypeOrmModule com PostgreSQL (módulo do TypeORM para NestJS)
 npm i @nestjs/typeorm typeorm pg
-nest g res pessoas
+## 37 nest g res pessoas
  
 
+----------------------------------------------------------------------------------------------
 
  # Utils
  nest --help

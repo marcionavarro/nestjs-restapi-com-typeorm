@@ -14,9 +14,9 @@ POST {{baseUrl}}/recados
 Content-Type: application/json
 
 {
-    "text": "Novo recado",
-    "de": "Joana",
-    "para": "João"
+    "text": "De Ricardo para Ana",
+    "deId": 13,
+    "paraId": 14
 }
 
 ### Atualiza um recado
@@ -47,8 +47,8 @@ POST {{baseUrl}}/pessoas
 Content-Type: application/json
 
 {
-    "nome": "Carlos",
-    "email": "carlos@example.com",
+    "nome": "Ana",
+    "email": "ana@example.com",
     "password": "123456"
 }
 

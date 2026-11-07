@@ -4,12 +4,14 @@ import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { PessoasService } from 'src/pessoas/pessoas.service';
 
 @Injectable()
 export class RecadosService {
   constructor(
     @InjectRepository(Recado)
     private readonly recadoRepository: Repository<Recado>,
+    private readonly pessoaService: PessoasService,
   ) {}
 
   throwNotFoundError() {
@@ -17,27 +19,54 @@ export class RecadosService {
   }
 
   async findAll() {
-    const recados = await this.recadoRepository.find();
+    const recados = await this.recadoRepository.find({
+      relations: ['de', 'para'],
+      order: { id: 'DESC' },
+      select: {
+        de: { id: true, nome: true },
+        para: { id: true, nome: true },
+      },
+    });
     return recados;
   }
 
   async findOne(id: number) {
     const recado = await this.recadoRepository.findOne({
       where: { id },
+      relations: ['de', 'para'],
+      select: {
+        de: { id: true, nome: true },
+        para: { id: true, nome: true },
+      },
     });
 
     if (recado) return recado;
     this.throwNotFoundError();
   }
 
-  create(createRecadoDto: CreateRecadoDto) {
+  async create(createRecadoDto: CreateRecadoDto) {
+    const { deId, paraId } = createRecadoDto;
+
+    // Encontrar a pessoa que está criando o recado
+    const de = await this.pessoaService.findOne(deId);
+
+    // Encontrar a pessoa para quem o recado está sendo enviado
+    const para = await this.pessoaService.findOne(paraId);
+
     const novoRecado = {
-      ...createRecadoDto,
+      text: createRecadoDto.text,
+      de,
+      para,
       lido: false,
       data: new Date(),
     };
     const recado = this.recadoRepository.create(novoRecado);
-    return this.recadoRepository.save(recado);
+    await this.recadoRepository.save(recado);
+    return {
+      ...recado,
+      de: { id: recado.de.id },
+      para: { id: recado.para.id },
+    };
   }
 
   async update(id: number, updateRecadoDto: UpdateRecadoDto) {
