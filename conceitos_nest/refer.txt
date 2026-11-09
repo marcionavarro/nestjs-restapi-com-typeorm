@@ -24,6 +24,10 @@ npm i @nestjs/typeorm typeorm pg
 
 ----------------------------------------------------------------------------------------------
 
+Seção 6: Pipes, Interceptors, Middlewares, Exception Filters, Guards e Params no NestJS
+
+----------------------------------------------------------------------------------------------
+
  # Utils
  nest --help
  npm run format
