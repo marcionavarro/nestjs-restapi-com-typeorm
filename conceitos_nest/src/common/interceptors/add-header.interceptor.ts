@@ -4,15 +4,18 @@ import {
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { RecadosService } from 'src/recados/recados.service';
 
+@Injectable()
 export class AddHeaderInterceptor implements NestInterceptor {
-  intercept(
-    context: ExecutionContext,
-    next: CallHandler<any>,
-  ): Observable<any> | Promise<Observable<any>> {
-    console.log('AddHeaderInterceptor executado');
+  constructor(private readonly recadosService: RecadosService) {}
+
+  async intercept(context: ExecutionContext, next: CallHandler<any>) {
+    // console.log('AddHeaderInterceptor executado');
     const response = context.switchToHttp().getResponse();
+
+    const recado = await this.recadosService.findOne(14);
+    console.log(recado);
 
     response.setHeader('X-Custom-Header', 'O valor do cabeçalho');
 

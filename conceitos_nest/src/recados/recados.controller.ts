@@ -18,6 +18,9 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
 import { TimingConnectionInterceptor } from 'src/common/interceptors/timing-connection.interceptor';
 import { ErrorHandleInterceptor } from 'src/common/interceptors/error-handle.interceptor';
+import { SimpleCacheInterceptor } from 'src/common/interceptors/simple-cache.interceptor';
+import { ChangeDataInterceptor } from 'src/common/interceptors/change-data.interceptor';
+import { AuthTokenInterceptor } from 'src/common/interceptors/auth-token.interceptor';
 
 interface Pagination {
   limit: number;
@@ -41,22 +44,21 @@ interface Recado {
 // DTO -> Data Transfer Object -> Objeto de transferência de dados.
 // DTO -> Objeto simples -> Validar dados / Transformar dados
 
+@UseInterceptors(AuthTokenInterceptor)
 @Controller('recados')
 export class RecadosController {
   constructor(private readonly recadosServices: RecadosService) {}
 
   @HttpCode(HttpStatus.OK)
   @Get()
-  @UseInterceptors(TimingConnectionInterceptor, ErrorHandleInterceptor)
   async findAll(@Query() paginationDto: PaginationDto) {
-    console.log('RecadosController executado');
+    // console.log('RecadosController executado');
     // return `Retorna todos os recado. Limit=${limit}, Offset=${offset}`;
     const recados = await this.recadosServices.findAll(paginationDto);
     return recados;
   }
 
   @Get(':id')
-  @UseInterceptors(AddHeaderInterceptor, ErrorHandleInterceptor)
   findOne(@Param('id') id: number) {
     return this.recadosServices.findOne(id);
   }
