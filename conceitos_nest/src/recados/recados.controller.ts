@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -9,6 +10,7 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   UseInterceptors,
 } from '@nestjs/common';
 import { RecadosService } from './recados.service';
@@ -51,11 +53,13 @@ export class RecadosController {
 
   @HttpCode(HttpStatus.OK)
   @Get()
-  async findAll(@Query() paginationDto: PaginationDto) {
+  async findAll(@Query() paginationDto: PaginationDto, @Req() req: Request) {
+    console.log('RecadosController', req['user']);
     // console.log('RecadosController executado');
     // return `Retorna todos os recado. Limit=${limit}, Offset=${offset}`;
     const recados = await this.recadosServices.findAll(paginationDto);
-    return recados;
+    throw new Error('Mensagem');
+    //return recados;
   }
 
   @Get(':id')

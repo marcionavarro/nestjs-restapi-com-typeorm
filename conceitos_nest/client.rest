@@ -2,13 +2,11 @@
 
 # Recados
 ### Lista todos os recados
-GET {{baseUrl}}/recados/
-?limit=10
-&offset=0
+GET {{baseUrl}}/recados/?limit=10&offset=0
 Authorization: Bearer 123456
 
 ### Lista apenas um recado
-GET {{baseUrl}}/recados/12/
+GET {{baseUrl}}/recados/17/
 
 ### Cria um recado
 POST {{baseUrl}}/recados
