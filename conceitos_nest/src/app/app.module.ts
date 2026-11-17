@@ -5,9 +5,9 @@ import { RecadosModule } from 'src/recados/recados.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PessoasModule } from 'src/pessoas/pessoas.module';
 import { SimpleMiddleware } from '../common/middlewares/simple.middleware';
-import { OutroMiddleware } from '../common/middlewares/outro.middleware';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { ErrorExceptionFilter } from '../common/filters/error-exception.filter';
+import { IsAdminGuard } from '../common/guards/is-admin.guard';
 
 @Module({
   imports: [
@@ -37,10 +37,6 @@ import { ErrorExceptionFilter } from '../common/filters/error-exception.filter';
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(SimpleMiddleware).forRoutes({
-      path: '*',
-      method: RequestMethod.ALL,
-    });
-    consumer.apply(OutroMiddleware).forRoutes({
       path: '*',
       method: RequestMethod.ALL,
     });

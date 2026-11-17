@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -11,18 +10,13 @@ import {
   Post,
   Query,
   Req,
-  UseInterceptors,
+  UseGuards,
 } from '@nestjs/common';
 import { RecadosService } from './recados.service';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
-import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
-import { TimingConnectionInterceptor } from 'src/common/interceptors/timing-connection.interceptor';
-import { ErrorHandleInterceptor } from 'src/common/interceptors/error-handle.interceptor';
-import { SimpleCacheInterceptor } from 'src/common/interceptors/simple-cache.interceptor';
-import { ChangeDataInterceptor } from 'src/common/interceptors/change-data.interceptor';
-import { AuthTokenInterceptor } from 'src/common/interceptors/auth-token.interceptor';
+import { IsAdminGuard } from '../common/guards/is-admin.guard';
 
 interface Pagination {
   limit: number;
@@ -46,20 +40,15 @@ interface Recado {
 // DTO -> Data Transfer Object -> Objeto de transferência de dados.
 // DTO -> Objeto simples -> Validar dados / Transformar dados
 
-@UseInterceptors(AuthTokenInterceptor)
 @Controller('recados')
 export class RecadosController {
   constructor(private readonly recadosServices: RecadosService) {}
 
-  @HttpCode(HttpStatus.OK)
+  @UseGuards(IsAdminGuard)
   @Get()
   async findAll(@Query() paginationDto: PaginationDto, @Req() req: Request) {
     console.log('RecadosController', req['user']);
-    // console.log('RecadosController executado');
-    // return `Retorna todos os recado. Limit=${limit}, Offset=${offset}`;
-    const recados = await this.recadosServices.findAll(paginationDto);
-    throw new Error('Mensagem');
-    //return recados;
+    return await this.recadosServices.findAll(paginationDto);
   }
 
   @Get(':id')
