@@ -11,11 +11,11 @@ export class AddHeaderInterceptor implements NestInterceptor {
   constructor(private readonly recadosService: RecadosService) {}
 
   async intercept(context: ExecutionContext, next: CallHandler<any>) {
-    // console.log('AddHeaderInterceptor executado');
+    // ('AddHeaderInterceptor executado');
     const response = context.switchToHttp().getResponse();
 
     const recado = await this.recadosService.findOne(14);
-    console.log(recado);
+    (recado);
 
     response.setHeader('X-Custom-Header', 'O valor do cabeçalho');
 

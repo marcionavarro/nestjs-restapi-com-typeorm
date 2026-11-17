@@ -11,7 +11,7 @@ export class TimingConnectionInterceptor implements NestInterceptor {
   async intercept(context: ExecutionContext, next: CallHandler<any>) {
     const startTime = Date.now();
 
-    // console.log('TimingConnectionInterceptor executado ANTES');
+    // ('TimingConnectionInterceptor executado ANTES');
 
     await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -19,7 +19,7 @@ export class TimingConnectionInterceptor implements NestInterceptor {
       tap(() => {
         const finalTime = Date.now();
         const elapsed = finalTime - startTime;
-        // console.log(
+        // (
         //   `TimingConnectionInterceptor: levou ${elapsed}ms para executar`,
         // );
       }),

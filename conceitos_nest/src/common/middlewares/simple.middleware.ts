@@ -6,7 +6,7 @@ import { Request, Response, NextFunction } from 'express';
 
 export class SimpleMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    console.log('SimpleMiddleware: Olá');
+    ('SimpleMiddleware: Olá');
     const authorization = req.headers.authorization;
 
     if (authorization) {
@@ -26,8 +26,8 @@ export class SimpleMiddleware implements NestMiddleware {
 
     next(); // Proximo middleware
 
-    console.log('SimpleMiddleware: Tchau!!');
+    ('SimpleMiddleware: Tchau!!');
 
-    res.on('finish', () => console.log('SimpleMiddleware: Terminou'));
+    res.on('finish', () => ('SimpleMiddleware: Terminou'));
   }
 }

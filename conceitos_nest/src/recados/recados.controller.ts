@@ -21,9 +21,7 @@ export class RecadosController {
   @Get()
   async findAll(
     @Query() paginationDto: PaginationDto,
-    @ReqDataParam('headers') method,
   ) {
-    console.log(method);
     return await this.recadosServices.findAll(paginationDto);
   }
 
