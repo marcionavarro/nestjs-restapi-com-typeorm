@@ -34,9 +34,7 @@ DELETE {{baseUrl}}/recados/4/
 
 # Pessoa
 ### Lista todos as pessoas
-GET {{baseUrl}}/pessoas/
-?limit=10
-&offset=0
+GET {{baseUrl}}/pessoas/?limit=10&offset=0
 
 ### Lista apenas uma pessoa
 GET {{baseUrl}}/pessoas/10/
