@@ -19,9 +19,7 @@ export class RecadosController {
   constructor(private readonly recadosServices: RecadosService) {}
 
   @Get()
-  async findAll(
-    @Query() paginationDto: PaginationDto,
-  ) {
+  async findAll(@Query() paginationDto: PaginationDto) {
     return await this.recadosServices.findAll(paginationDto);
   }
 
